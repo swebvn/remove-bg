@@ -2,6 +2,8 @@
 
 namespace Swebvn\RemoveBg;
 
+use Codewithkyrian\Transformers\Exceptions\HubException;
+use Codewithkyrian\Transformers\Exceptions\UnsupportedModelTypeException;
 use Codewithkyrian\Transformers\Models\Auto\AutoModel;
 use Codewithkyrian\Transformers\Processors\AutoProcessor;
 use Codewithkyrian\Transformers\Transformers;
@@ -15,6 +17,10 @@ class RemoveBackground
         Transformers::setup()->setImageDriver(ImageDriver::GD);
     }
 
+    /**
+     * @throws HubException
+     * @throws UnsupportedModelTypeException
+     */
     public function handle(string $filePath): string
     {
         $model = AutoModel::fromPretrained($this->modelName);
@@ -26,9 +32,6 @@ class RemoveBackground
 
         $mask = Image::fromTensor($output[0]->multiply(255))
             ->resize($image->width(), $image->height());
-
-        $maskedName = pathinfo($filePath, PATHINFO_FILENAME).'_masked';
-        $maskedPath = "images/$maskedName.png";
 
         $maskedImage = $image->applyMask($mask);
 
