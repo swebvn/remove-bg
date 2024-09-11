@@ -13,7 +13,7 @@ include 'vendor/autoload.php';
 $url = $_SERVER['REQUEST_URI'];
 $parts = explode('/', $url);
 // $remoteUrl should be remaining parts of the url
-$remoteUrl = 'http://' . implode('/', array_slice($parts, 1));
+$remoteUrl = 'https://' . implode('/', array_slice($parts, 1));
 // validate the url
 if (filter_var($remoteUrl, FILTER_VALIDATE_URL) === false) {
     echo 'Invalid URL';
