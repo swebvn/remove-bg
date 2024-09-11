@@ -1,0 +1,25 @@
+{
+    "name": "swebvn/remove-bg",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Swebvn\\RemoveBg\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bangnokia",
+            "email": "bangnokia@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "8.2|8.3",
+        "codewithkyrian/transformers": "^0.5.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "codewithkyrian/transformers-libsloader": true
+        }
+    }
+}

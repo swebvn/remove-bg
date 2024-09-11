@@ -1,0 +1,5 @@
+/vendor/
+/.idea
+/.vscode
+/.tmp
+/.transformers-cache
