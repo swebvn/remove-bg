@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+
 include 'vendor/autoload.php';
 
 // This app parse the url with format
