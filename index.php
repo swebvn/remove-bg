@@ -50,7 +50,12 @@ file_put_contents($filename, $imageContent);
 
 // remove the background
 $action = new \Swebvn\RemoveBg\RemoveBackground();
-$content = $action->handle($filename);
+try {
+    $content = $action->handle($filename);
+} catch (\Exception $e) {
+    echo 'Error when remove background: ' . $e->getMessage();
+    exit;
+}
 
 header('Content-Type: image/png');
 echo $content;
