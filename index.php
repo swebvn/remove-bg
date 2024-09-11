@@ -29,7 +29,12 @@ if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
 }
 
 // get the image
-$client = new \GuzzleHttp\Client(['verify' => false]);
+$client = new \GuzzleHttp\Client([
+    'verify' => false,
+    'headers' => [
+        'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    ],
+]);
 try {
     $response = $client->get($remoteUrl);
 } catch (\GuzzleHttp\Exception\GuzzleException $e) {
