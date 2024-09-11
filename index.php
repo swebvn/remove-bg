@@ -29,7 +29,7 @@ if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
 }
 
 // get the image
-$image = file_get_contents($remoteUrl, false, stream_context_create([
+$imageContent = file_get_contents($remoteUrl, false, stream_context_create([
     'ssl' => [
         'verify_peer' => false,
         'verify_peer_name' => false,
@@ -39,7 +39,7 @@ $image = file_get_contents($remoteUrl, false, stream_context_create([
 // store the image in folder /tmp
 // store in current folder /tmp folder
 $filename = __DIR__ . '/tmp/' . uniqid() . '.' . $ext;
-file_put_contents($filename, $image);
+file_put_contents($filename, $imageContent);
 
 // remove the background
 $action = new \Swebvn\RemoveBg\RemoveBackground();
