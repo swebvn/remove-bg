@@ -29,12 +29,9 @@ if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
 }
 
 // get the image
-$imageContent = file_get_contents($remoteUrl, false, stream_context_create([
-    'ssl' => [
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-    ],
-]));
+$client = new \GuzzleHttp\Client(['verify' => false]);
+$response = $client->get($remoteUrl);
+$imageContent = $response->getBody()->getContents();
 
 // store the image in folder /tmp
 // store in current folder /tmp folder

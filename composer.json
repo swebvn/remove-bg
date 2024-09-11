@@ -14,8 +14,9 @@
         }
     ],
     "require": {
-        "php": "8.2|8.3",
-        "codewithkyrian/transformers": "^0.5.2"
+        "php": "^8.3",
+        "codewithkyrian/transformers": "^0.5.2",
+        "guzzlehttp/guzzle": "^7.0"
     },
     "config": {
         "allow-plugins": {
