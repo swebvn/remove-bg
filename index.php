@@ -30,7 +30,12 @@ if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
 
 // get the image
 $client = new \GuzzleHttp\Client(['verify' => false]);
-$response = $client->get($remoteUrl);
+try {
+    $response = $client->get($remoteUrl);
+} catch (\GuzzleHttp\Exception\GuzzleException $e) {
+    echo 'Error: ' . $e->getMessage();
+    exit;
+}
 $imageContent = $response->getBody()->getContents();
 
 // store the image in folder /tmp
