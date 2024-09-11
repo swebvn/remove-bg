@@ -1,5 +1,6 @@
 <?php
 
+die('working?$A');
 error_reporting(E_ALL);
 
 include 'vendor/autoload.php';
