@@ -29,7 +29,12 @@ if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
 }
 
 // get the image
-$image = file_get_contents($remoteUrl);
+$image = file_get_contents($remoteUrl, false, stream_context_create([
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+    ],
+]));
 
 // store the image in folder /tmp
 // store in current folder /tmp folder
