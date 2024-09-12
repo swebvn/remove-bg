@@ -11,9 +11,12 @@ include 'vendor/autoload.php';
 // parse the url
 
 $url = $_SERVER['REQUEST_URI'];
-$parts = explode('/', $url);
+$parts = parse_url($url);
 // $remoteUrl should be remaining parts of the url
-$remoteUrl = 'https://' . implode('/', array_slice($parts, 1));
+$remoteUrl = 'https:/' . $parts['path'];
+if ($parts['query']) {
+    $remoteUrl .= '?' . $parts['query'];
+}
 // validate the url
 if (filter_var($remoteUrl, FILTER_VALIDATE_URL) === false) {
     echo 'Invalid URL';
