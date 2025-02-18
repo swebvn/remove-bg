@@ -14,7 +14,7 @@ $url = $_SERVER['REQUEST_URI'];
 $parts = parse_url($url);
 // $remoteUrl should be remaining parts of the url
 $remoteUrl = 'https:/' . $parts['path'];
-if ($parts['query']) {
+if ($parts['query'] ?? null) {
     $remoteUrl .= '?' . $parts['query'];
 }
 // validate the url
