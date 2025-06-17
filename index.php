@@ -12,11 +12,19 @@ include 'vendor/autoload.php';
 
 $url = $_SERVER['REQUEST_URI'];
 $parts = parse_url($url);
-// $remoteUrl should be remaining parts of the url
-$remoteUrl = 'https:/' . $parts['path'];
-if ($parts['query'] ?? null) {
-    $remoteUrl .= '?' . $parts['query'];
+
+if ($parts['query']['url'] ?? null) {
+    // if the url has query string, we assume it is the remote url
+    $remoteUrl = $parts['query']['url'];
+} else {
+    // $remoteUrl should be remaining parts of the url
+    $remoteUrl = 'https:/' . $parts['path'];
+    if ($parts['query'] ?? null) {
+        $remoteUrl .= '?' . $parts['query'];
+    }
 }
+
+
 // validate the url
 if (filter_var($remoteUrl, FILTER_VALIDATE_URL) === false) {
     echo 'Invalid URL';
