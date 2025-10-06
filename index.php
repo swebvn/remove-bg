@@ -34,7 +34,7 @@ if (filter_var($remoteUrl, FILTER_VALIDATE_URL) === false) {
 // get the extension of image
 $ext = pathinfo($parts['path'], PATHINFO_EXTENSION);
 // only accept png, jpg, jpeg
-if (!in_array($ext, ['png', 'jpg', 'jpeg'])) {
+if (!in_array($ext, ['png', 'jpg', 'jpeg','webp'])) {
     echo 'Invalid image format';
     exit;
 }
