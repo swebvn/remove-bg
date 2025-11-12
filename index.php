@@ -69,6 +69,8 @@ try {
 }
 
 header('Content-Type: image/png');
+header('Access-Control-Allow-Origin: *');
+
 echo $content;
 
 // remove the image
