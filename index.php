@@ -13,15 +13,20 @@ include 'vendor/autoload.php';
 $url = $_SERVER['REQUEST_URI'];
 $parts = parse_url($url);
 
-if ($parts['query']['url'] ?? null) {
+// parse query string to extract driver and other params
+$queryParams = [];
+if (isset($parts['query'])) {
+    parse_str($parts['query'], $queryParams);
+}
+
+$driver = $queryParams['driver'] ?? 'rembg';
+
+if ($queryParams['url'] ?? null) {
     // if the url has query string, we assume it is the remote url
-    $remoteUrl = $parts['query']['url'];
+    $remoteUrl = $queryParams['url'];
 } else {
     // $remoteUrl should be remaining parts of the url
     $remoteUrl = 'https:/' . $parts['path'];
-    if ($parts['query'] ?? null) {
-        $remoteUrl .= '?' . $parts['query'];
-    }
 }
 
 
@@ -62,7 +67,7 @@ file_put_contents($filename, $imageContent);
 // remove the background
 $action = new \Swebvn\RemoveBg\RemoveBackground();
 try {
-    $content = $action->handle($filename);
+    $content = $action->handle($filename, $driver);
 } catch (\Exception $e) {
     echo 'Error when remove background: ' . $e->getMessage();
     exit;
