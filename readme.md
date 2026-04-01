@@ -2,7 +2,7 @@
 
 ## Install
 
-### rembg (default)
+### rembg (optional)
 Install the [rembg](https://github.com/danielgatis/rembg) Python CLI tool:
 ```bash
 pip install rembg[cli]
@@ -13,8 +13,8 @@ Then install PHP dependencies:
 composer install
 ```
 
-### PHP Transformers (legacy)
-If you want to use the old PHP Transformers-based method instead:
+### PHP Transformers (default)
+Install PHP dependencies and download the model:
 ```bash
 composer install
 
@@ -34,10 +34,9 @@ https://remove-bg.test/example.com/image.jpg
 ```
 
 ### Switching driver at runtime
-By default, `rembg` is used. You can switch the driver via the `driver` query string:
+By default, PHP Transformers is used. You can switch to `rembg` via the `driver` query string:
 ```text
 https://remove-bg.test/example.com/image.jpg?driver=rembg
-https://remove-bg.test/example.com/image.jpg?driver=transformers
 ```
 
 Enjoy!

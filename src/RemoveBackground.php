@@ -23,11 +23,11 @@ class RemoveBackground
      * @param string $driver 'rembg' or 'transformers'
      * @throws RuntimeException
      */
-    public function handle(string $filePath, string $driver = 'rembg'): string
+    public function handle(string $filePath, string $driver = 'transformers'): string
     {
         return match ($driver) {
-            'transformers' => $this->handleWithTransformers($filePath),
-            default => $this->handleWithRembg($filePath),
+            'rembg' => $this->handleWithRembg($filePath),
+            default => $this->handleWithTransformers($filePath),
         };
     }
 

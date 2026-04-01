@@ -19,7 +19,7 @@ if (isset($parts['query'])) {
     parse_str($parts['query'], $queryParams);
 }
 
-$driver = $queryParams['driver'] ?? 'rembg';
+$driver = $queryParams['driver'] ?? 'transformers';
 
 if ($queryParams['url'] ?? null) {
     // if the url has query string, we assume it is the remote url
