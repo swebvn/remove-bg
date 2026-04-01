@@ -13,8 +13,17 @@ use RuntimeException;
 
 class RemoveBackground
 {
-    public function __construct(protected string $modelName = 'briaai/RMBG-1.4')
-    {
+    protected const REMBG_PATHS = [
+        '/Users/daudau/.pyenv/shims/rembg',
+        '/usr/local/bin/rembg',
+        '/usr/bin/rembg',
+        'C:\Users\ADMIN\miniconda3\Scripts\rembg.exe',
+        'rembg',
+    ];
+
+    public function __construct(
+        protected string $modelName = 'briaai/RMBG-1.4',
+    ) {
     }
 
     /**
@@ -41,8 +50,11 @@ class RemoveBackground
     {
         $outputPath = sys_get_temp_dir() . '/' . uniqid('rembg_') . '.png';
 
+        $rembgBin = $this->resolveRembgPath();
+
         $command = sprintf(
-            'rembg i %s %s 2>&1',
+            '%s i %s %s 2>&1',
+            escapeshellarg($rembgBin),
             escapeshellarg($filePath),
             escapeshellarg($outputPath)
         );
@@ -61,6 +73,24 @@ class RemoveBackground
         @unlink($outputPath);
 
         return $content;
+    }
+
+    /**
+     * Find the first existing rembg binary from the known paths.
+     *
+     * @throws RuntimeException
+     */
+    protected function resolveRembgPath(): string
+    {
+        foreach (self::REMBG_PATHS as $path) {
+            if (file_exists($path)) {
+                return $path;
+            }
+        }
+
+        throw new RuntimeException(
+            'rembg binary not found. Searched: ' . implode(', ', self::REMBG_PATHS)
+        );
     }
 
     /**
