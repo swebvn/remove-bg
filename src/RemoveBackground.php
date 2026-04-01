@@ -18,6 +18,7 @@ class RemoveBackground
         '/usr/local/bin/rembg',
         '/usr/bin/rembg',
         'C:\Users\ADMIN\miniconda3\Scripts\rembg.exe',
+        'C:\Users\Admin\anaconda3\Scripts\rembg.exe',
         'rembg',
     ];
 
